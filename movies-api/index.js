@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import moviesRouter from './api/movies';
 import usersRouter from './api/users';
+import genresRouter from './api/genres';
 import bodyParser from 'body-parser';
 
 
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use('/api/movies', moviesRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/genres', genresRouter);
 app.use(errHandler);
 
 app.listen(port, () => {

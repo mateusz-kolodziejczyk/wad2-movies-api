@@ -33,9 +33,11 @@ router.post('/:userName/favourites', (req, res, next) => {
             user => {
                 (user.favourites) ? user.favourites.push(newFavourite) : user.favourites = [newFavourite];
                 console.log(user);
-                User.findOneAndUpdate(query, { favourites: user.favourites }, {
-                    new: true
-                }).then(user => res.status(201).send(user)).catch(next);
+                User.findOneAndUpdate(query, { favourites: user.favourites },
+                    {
+                        new: true,
+                        runValidators: true
+                    }).then(user => res.status(201).send(user)).catch(next);
             }
         ).catch(next);
     } else {
