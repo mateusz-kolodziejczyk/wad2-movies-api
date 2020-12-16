@@ -7,7 +7,7 @@ import usersRouter from './api/users';
 import genresRouter from './api/genres';
 import bodyParser from 'body-parser';
 import session from 'express-session';
-import authenticate from './authenticate';
+import passport from './authenticate';
 
 dotenv.config();
 const errHandler = (err, req, res, next) => {
@@ -24,7 +24,6 @@ if (process.env.SEED_DB) {
 const app = express();
 
 const port = process.env.PORT;
-
 app.use(session({
     secret: 'ilikecake',
     resave: true,
@@ -35,8 +34,12 @@ app.use(express.static('public'));
 //configure body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
+app.use(passport.initialize());
+
+
 //update /api/Movie route
-app.use('/api/movies', authenticate, moviesRouter);
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/genres', genresRouter);
 app.use(errHandler);
