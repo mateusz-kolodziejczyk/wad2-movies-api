@@ -1,5 +1,5 @@
 import './db';
-import { loadUsers } from './seedData'
+import { loadUsers, loadMovies } from './seedData'
 import dotenv from 'dotenv';
 import express from 'express';
 import moviesRouter from './api/movies';
@@ -20,6 +20,7 @@ const errHandler = (err, req, res, next) => {
 };
 if (process.env.SEED_DB) {
     loadUsers();
+    loadMovies();
 }
 const app = express();
 
