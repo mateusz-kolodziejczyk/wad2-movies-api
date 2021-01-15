@@ -21,7 +21,7 @@ const PersonSchema = new Schema({
   homepage: { type: String},
 });
 
-PersonSchema.statics.findByMovieDBId = function (id) {
+PersonSchema.statics.findByPersonDBId = function (id) {
   return this.findOne({ id: id });
 };
 
