@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 
 const PersonSchema = new Schema({
-
   birthday: { type: String},
   known_for_department: { type: String },
   deathday: { type: String },

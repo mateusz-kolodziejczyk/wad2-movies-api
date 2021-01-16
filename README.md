@@ -6,8 +6,8 @@ Name: Your Name
 
 ...... A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** ......,
  
- + Feature 1 - .... a statement of its purpose/objective ..... 
- + Feature 2 - .......
+ + People routes - Allows a user to access information about individual people or all people in a database.
+ + User protected routes - Routes related to user favourites are restricted to an authorized user.
  + Feature 3 = ......
  + etc
  + etc
@@ -66,18 +66,19 @@ Protected routes:
 Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
 
 ~~~Javascript
-export const getMovies = () => {
-  return fetch(
-     '/api/movies',{headers: {
-       'Authorization': window.localStorage.getItem('token')
-    }
-  }
-  )
-    .then(res => res.json())
-    .then(json => {return json.results;});
+export const addFavourite = (username, id) => {
+    return fetch(`/api/users/${username}/favourites`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': window.localStorage.getItem('token')
+        },
+        method: 'post',
+        body: JSON.stringify({ id: id})
+    }).then(res => res.json())
 };
-
 ~~~
+
+A movie id is added to the favourites. The app reflects the change
 
 ## Extra features
 
