@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { AuthContext } from '../contexts/authContext.js';
+import { AuthContext } from '../contexts/authContext';
 import { Link } from "react-router-dom";
 
 const LoginPage = props => {
@@ -8,6 +8,7 @@ const LoginPage = props => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  console.log(context);
   const login = () => {
     context.authenticate(userName, password);
   };

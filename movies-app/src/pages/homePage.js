@@ -11,10 +11,11 @@ const MovieListPage = (props) => {
   const params = new URLSearchParams(props.location.search);
   const location = useLocation();
   const path = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
-  console.log(params.toString());
+  console.log(window.localStorage.getItem('token'));
   const context = useContext(MoviesContext);
 
-  const [movies, setMovies] = useState(null);
+  const movies = context.movies;
+  /*
   useEffect(() => {
     if (params.toString() !== "") {
       context.loadMoviesQueryString(params.toString());
@@ -33,7 +34,7 @@ const MovieListPage = (props) => {
       })
     }));
   }, [context.movies, context.favorites])
-
+*/
 
   return (
     <>
