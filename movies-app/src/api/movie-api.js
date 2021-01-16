@@ -30,7 +30,7 @@ export const getMovies = () => {
   export const getFavourites = (username) => {
     return fetch(
        `/api/users/${username}/favourites`,{headers: {
-         'Authorization': window.localStorage.getItem('token')
+         //'Authorization': window.localStorage.getItem('token')
       }
     }
     ).then(res => res.json());
@@ -39,7 +39,7 @@ export const getMovies = () => {
     return fetch(`/api/users/${username}/favourites`, {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': window.localStorage.getItem('token')
+            //'Authorization': window.localStorage.getItem('token')
         },
         method: 'post',
         body: JSON.stringify({ id: id})

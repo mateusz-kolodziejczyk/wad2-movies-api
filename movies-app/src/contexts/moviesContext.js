@@ -6,10 +6,9 @@ export const MoviesContext = createContext(null);
 const reducer = (state, action) => {
     switch (action.type) {
         case "load":
-            return { movies: action.payload.result };
+            return { movies: action.payload.result, favourites: [...state.favourites] };
         case "load-favourites":
-            return null;
-
+            return {movies: [...state.movies], favourites: action.payload.favourites};
         default:
             return state;
     }
@@ -18,6 +17,8 @@ const reducer = (state, action) => {
 const MoviesContextProvider = props => {
     const [state, dispatch] = useReducer(reducer, { movies: [], favourites: [] });
     const [authenticated, setAuthenticated] = useState(false);
+
+ 
 
     useEffect(() => {
         getMovies().then(result => {
@@ -28,20 +29,26 @@ const MoviesContextProvider = props => {
 
     // The favourites will only be loaded if a username can be provided.
     const loadFavourites = (username) => {
-        getFavourites(username).then((movies) => {
-            dispatch({ type: "load-favourites", payload: { movies } });
+        getFavourites(username).then((favourites) => {
+            dispatch({ type: "load-favourites", payload: { favourites } });
         });
     }
-
-    const addToFavorites = (username) => {
-        addFavourite(username);
+    const addToFavourites = (username, id) => {
+        
+        // Add a movie to favourites, then load favourites after its been updated.
+        addFavourite(username, id).then(() =>{
+            loadFavourites(username);
+        })
     };
 
     return (
         <MoviesContext.Provider
             value={{
                 movies: state.movies,
-                setAuthenticated
+                favourites: state.favourites,
+                setAuthenticated,
+                addToFavourites,
+                loadFavourites,
             }}
         >
             {props.children}

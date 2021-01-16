@@ -93,7 +93,7 @@ router.post('/:userName/favourites', async (req, res, next) => {
 
 router.get('/:userName/favourites', (req, res, next) => {
   const user = req.params.userName;
-  User.find({ username: user }).then(
+  User.findOne({ username: user }).then(
     user => res.status(201).send(user.favourites)
   ).catch(next);
 });

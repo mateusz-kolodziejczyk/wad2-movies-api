@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from '../contexts/authContext';
+import { MoviesContext} from '../contexts/moviesContext';
 import { Link } from "react-router-dom";
 
 const LoginPage = props => {
   const context = useContext(AuthContext)
+  const moviesContext = useContext(MoviesContext);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,6 +20,7 @@ const LoginPage = props => {
   const { from } = props.location.state || { from: { pathname: "/" } };
 
   if (context.isAuthenticated === true) {
+    //moviesContext.loadFavourites(userName);
     return <Redirect to={from} />;
   }
   return (

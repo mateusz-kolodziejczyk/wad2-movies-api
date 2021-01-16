@@ -5,15 +5,22 @@ import AddToFavoritesButton from '../components/buttons/addToFavorites';
 import DiscoverSearchForm from '../components/discoverSearchForm';
 import { MoviesContext } from '../contexts/moviesContext';
 import './expandingButton.css'
+import { getFavourites } from "../api/movie-api";
+import { AuthContext } from '../contexts/authContext';
 
 const MovieListPage = (props) => {
   // Find out 
   const params = new URLSearchParams(props.location.search);
   const location = useLocation();
   const path = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
-  console.log(window.localStorage.getItem('token'));
+
+  const authContext = useContext(AuthContext);
   const context = useContext(MoviesContext);
-  const movies = context.movies;
+  context.loadFavourites(authContext.userName);
+
+
+  const movies = context.movies.filter((movies) => !context.favourites.includes(movies._id));
+    
   /*
   useEffect(() => {
     if (params.toString() !== "") {
