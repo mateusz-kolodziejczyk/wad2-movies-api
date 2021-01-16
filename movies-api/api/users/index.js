@@ -2,7 +2,7 @@ import express from 'express';
 import User from './userModel';
 import movieModel from '../movies/movieModel';
 import jwt from 'jsonwebtoken';
-import { use } from 'passport';
+import passport, { use } from 'passport';
 
 const router = express.Router(); // eslint-disable-line
 
@@ -66,7 +66,7 @@ router.put('/:id', (req, res, next) => {
   })
     .then(user => res.json(200, user)).catch(next);
 });
-
+/*
 //Add a favourite. No Error Handling Yet. Can add duplicates too!
 router.post('/:userName/favourites', async (req, res, next) => {
   try {
@@ -92,10 +92,11 @@ router.post('/:userName/favourites', async (req, res, next) => {
 });
 
 router.get('/:userName/favourites', (req, res, next) => {
+
   const user = req.params.userName;
   User.findOne({ username: user }).then(
     user => res.status(201).send(user.favourites)
   ).catch(next);
 });
-
+*/
 export default router;

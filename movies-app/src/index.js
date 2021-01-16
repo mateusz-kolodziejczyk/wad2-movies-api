@@ -16,6 +16,7 @@ import PersonPage from './pages/personPage';
 import WatchlistPage from "./pages/watchlistPage";
 import MovieCastPage from "./pages/movieCastPage";
 import LoginPage from "./pages/loginPage";
+import SignUpPage from "./pages/signUpPage";
 import AuthContextProvider from "./contexts/authContext";
 import PrivateRoute from "./components/privateRoute";
 
@@ -34,6 +35,7 @@ const App = () => {
                   <PrivateRoute exact path="/movies/top-rated" component={TopRatedMoviesPage} />
                   <PrivateRoute exact path="/movies/watchlist" component={WatchlistPage} />
                   <Route exact path="/login" component={LoginPage} />
+                  <Route exact path="/signup" component={SignUpPage} />
                   <PrivateRoute path="/movies/:id/full-cast" component={MovieCastPage} />
                   <PrivateRoute path="/movies/:id" component={MoviePage} />
                   <PrivateRoute exact path="/reviews/form" component={AddMovieReviewPage} />

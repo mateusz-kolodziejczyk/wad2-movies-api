@@ -6,6 +6,7 @@ import moviesRouter from './api/movies';
 import usersRouter from './api/users';
 import genresRouter from './api/genres';
 import peopleRouter from './api/people';
+import protectedUsersRouter from './api/users/protected';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import passport from './authenticate';
@@ -43,8 +44,8 @@ app.use(passport.initialize());
 
 //update /api/Movie route
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
-//app.use('/api/movies', moviesRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/users', passport.authenticate('jwt', {session: false}), protectedUsersRouter)
 app.use('/api/genres', genresRouter);
 app.use('/api/people', peopleRouter)
 app.use(errHandler);
