@@ -17,6 +17,7 @@ import WatchlistPage from "./pages/watchlistPage";
 import MovieCastPage from "./pages/movieCastPage";
 import LoginPage from "./pages/loginPage";
 import AuthContextProvider from "./contexts/authContext";
+import PrivateRoute from "./components/privateRoute";
 
 const App = () => {
   return (
@@ -28,17 +29,17 @@ const App = () => {
             <MoviesContextProvider>
               <GenresContextProvider>
                 <Switch>
-                  <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
-                  <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
-                  <Route exact path="/movies/top-rated" component={TopRatedMoviesPage} />
-                  <Route exact path="/movies/watchlist" component={WatchlistPage} />
+                  <PrivateRoute exact path="/movies/favorites" component={FavoriteMoviesPage} />
+                  <PrivateRoute exact path="/movies/upcoming" component={UpcomingMoviesPage} />
+                  <PrivateRoute exact path="/movies/top-rated" component={TopRatedMoviesPage} />
+                  <PrivateRoute exact path="/movies/watchlist" component={WatchlistPage} />
                   <Route exact path="/login" component={LoginPage} />
-                  <Route path="/movies/:id/full-cast" component={MovieCastPage} />
-                  <Route path="/movies/:id" component={MoviePage} />
-                  <Route exact path="/reviews/form" component={AddMovieReviewPage} />
-                  <Route path="/reviews/:id" component={MovieReviewPage} />
-                  <Route path="/person/:id" component={PersonPage} />
-                  <Route path="/" component={HomePage} />
+                  <PrivateRoute path="/movies/:id/full-cast" component={MovieCastPage} />
+                  <PrivateRoute path="/movies/:id" component={MoviePage} />
+                  <PrivateRoute exact path="/reviews/form" component={AddMovieReviewPage} />
+                  <PrivateRoute path="/reviews/:id" component={MovieReviewPage} />
+                  <PrivateRoute path="/person/:id" component={PersonPage} />
+                  <PrivateRoute path="/" component={HomePage} />
                   <Redirect from="*" to="/" />
                 </Switch>
               </GenresContextProvider>

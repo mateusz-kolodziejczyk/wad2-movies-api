@@ -13,7 +13,6 @@ const MovieListPage = (props) => {
   const path = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
   console.log(window.localStorage.getItem('token'));
   const context = useContext(MoviesContext);
-
   const movies = context.movies;
   /*
   useEffect(() => {
