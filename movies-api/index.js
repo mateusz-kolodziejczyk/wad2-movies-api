@@ -1,11 +1,12 @@
 import './db';
-import { loadUsers, loadMovies, loadPeople } from './seedData'
+import { loadUsers, loadMovies, loadPeople, deleteReviews } from './seedData'
 import dotenv, { load } from 'dotenv';
 import express from 'express';
 import moviesRouter from './api/movies';
 import usersRouter from './api/users';
 import genresRouter from './api/genres';
 import peopleRouter from './api/people';
+import reviewsRouter from './api/reviews';
 import protectedUsersRouter from './api/users/protected';
 import bodyParser from 'body-parser';
 import session from 'express-session';
@@ -24,6 +25,7 @@ if (process.env.SEED_DB) {
     loadUsers();
     loadMovies();
     loadPeople();
+    deleteReviews();
 }
 const app = express();
 
@@ -45,6 +47,7 @@ app.use(passport.initialize());
 //update /api/Movie route
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/reviews', reviewsRouter);
 app.use('/api/users', passport.authenticate('jwt', {session: false}), protectedUsersRouter)
 app.use('/api/genres', genresRouter);
 app.use('/api/people', peopleRouter)

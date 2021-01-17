@@ -22,10 +22,11 @@ Describe getting/installing the software, perhaps:
 git clone http:\myrepo.git
 ```
 
-followed by installation
-
+Installation
+You need a working mongodb install, as well as npm and node.
+Then run npm install in movies-api and movies-app.
 ```bat
-git install
+npm install
 ```
 
 ## API Configuration
@@ -47,19 +48,31 @@ Give an overview of your web API design, perhaps similar to the following:
 
 |  |  GET | POST | PUT | DELETE
 | -- | -- | -- | -- | -- 
+| movies | -- | -- | -- | -- 
 | /api/movies |Gets a list of movies | N/A | N/A |
 | /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
 | /api/movies/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie | N/A | N/A  
-| ... | ... | ... | ... | ...
-
+| -- | -- | -- | -- | -- 
+| users | -- | -- | -- | --
+| /api/users | Get all users | Register or authenticate user | ... | ...
+| -- | -- | -- | -- | --
+| reviews | -- | -- | -- | --
+| /api/reviews/ | Get all reviews | N/A | N/A | N/A
+| /api/reviews/{movieid} | Get all reviews for 1 movie | N/A | N/A | N/A
+| /api/reviews/{movieid}/{username} | Get the review from the user | N/A | Insert or Update a review. | N/A
+| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
+| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
+| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
+| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
 If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
 
 
 ## Security and Authentication
 Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
 Protected routes:
-    /api/movies | All|
-    /api/users/:username/favourites | Restricted to a logged in user |
+    /api/movies 
+    /api/users/:username/favourites  
+    /api/reviews/ 
 
 ## Integrating with React App
 

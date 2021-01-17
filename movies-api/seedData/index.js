@@ -1,6 +1,7 @@
 import userModel from '../api/users/userModel';
 import movieModel from '../api/movies/movieModel';
 import personModel from '../api/people/personModel';
+import reviewModel from '../api/reviews/reviewModel';
 import {movies} from './movies.js';
 import {people} from './people.js';
 
@@ -51,3 +52,14 @@ export async function loadMovies() {
       console.error(`failed to Load people Data: ${err}`);
     }
   }
+
+  export async function deleteReviews(){
+    console.log('delete existing reviews');
+    try{
+      await reviewModel.deleteMany();
+    }
+    catch(err){
+      console.error(`failed to delete reviews: ${err}`)
+    }
+  }
+
