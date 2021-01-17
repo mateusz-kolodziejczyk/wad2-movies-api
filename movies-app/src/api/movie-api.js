@@ -61,7 +61,7 @@ export const addUserReview = (id, username, content) => {
             'Content-Type': 'application/json',
             //'Authorization': window.localStorage.getItem('token')
         },
-        method: 'post',
+        method: 'put',
         body: JSON.stringify({ content: content})
     }).then(res => res.json())
 }

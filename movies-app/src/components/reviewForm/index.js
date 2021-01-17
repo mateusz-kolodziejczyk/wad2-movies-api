@@ -1,33 +1,29 @@
-import React, {useContext } from "react";
+import React, {useContext, useEffect, useState } from "react";
 import "./reviewForm.css";
 import useForm from "react-hook-form";
 import {MoviesContext} from '../../contexts/moviesContext'
+import {AuthContext} from '../../contexts/authContext';
 import { withRouter } from "react-router-dom";
-import { addUserReview} from "../../api/movie-api";
+import { addUserReview, getUserReview} from "../../api/movie-api";
 
 const ReviewForm = ({ movie, history }) => {
   const { register, handleSubmit, errors, reset } = useForm();
-  const context = useContext(MoviesContext);
-
+  const context = useContext(AuthContext);
+  const [review , setReview] = useState(null);
+  useEffect(() => {
+    getUserReview(movie.id, context.userName).then(review => {
+      setReview(review);
+    });
+  }, []);
   const onSubmit = data => {
-    addUserReview(movie, data)
-    history.push("/movies/favorites");
+    addUserReview(movie.id, context.userName , data.content)
   };
 
   return (
-    <form className="form bg-dark text-light" onSubmit={handleSubmit(onSubmit)}>
+    <>
+      {review ?
+          <form className="form bg-dark text-light" onSubmit={handleSubmit(onSubmit)}>
       <h3>Add your review</h3>
-      <div className="form-group">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Author"
-          defaultValue={review.author ? review.author : ""}
-          name="author"
-          ref={register({ required: "Author name required" })}
-        />
-      </div>
-      {errors.author && <p className=" text-white">{errors.author.message} </p>}
       <div className="form-group">
         <textarea
           rows="10"
@@ -63,6 +59,9 @@ const ReviewForm = ({ movie, history }) => {
       </button>
 
     </form>
+    : <h3>Loading previous review</h3>}
+    </>
+
   );
 };
 
