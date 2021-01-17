@@ -2,9 +2,11 @@ import userModel from '../api/users/userModel';
 import movieModel from '../api/movies/movieModel';
 import personModel from '../api/people/personModel';
 import reviewModel from '../api/reviews/reviewModel';
+import genresModel from '../api/genres/genresModel'
 import {movies} from './movies.js';
 import {people} from './people.js';
 
+const genres = require('./genres.json');
 const users = [
   {
     'username': 'user1',
@@ -52,7 +54,18 @@ export async function loadMovies() {
       console.error(`failed to Load people Data: ${err}`);
     }
   }
-
+  // deletes all genres documents in collection and inserts test data
+  export async function loadGenres() {
+    console.log('load seed data');
+    console.log(genres.length);
+    try {
+      await genresModel.deleteMany();
+      await genresModel.collection.insertMany(genres);
+      console.info(`${genres.length} genres were successfully stored.`);
+    } catch (err) {
+      console.error(`failed to Load genre Data: ${err}`);
+    }
+  }
   export async function deleteReviews(){
     console.log('delete existing reviews');
     try{

@@ -3,13 +3,14 @@ import "./reviewForm.css";
 import useForm from "react-hook-form";
 import {MoviesContext} from '../../contexts/moviesContext'
 import { withRouter } from "react-router-dom";
+import { addUserReview} from "../../api/movie-api";
 
 const ReviewForm = ({ movie, history }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const context = useContext(MoviesContext);
 
   const onSubmit = data => {
-    context.addReview(movie, data)
+    addUserReview(movie, data)
     history.push("/movies/favorites");
   };
 
@@ -21,7 +22,7 @@ const ReviewForm = ({ movie, history }) => {
           type="text"
           className="form-control"
           placeholder="Author"
-          defaultValue={movie.review ? movie.review.author : ""}
+          defaultValue={review.author ? review.author : ""}
           name="author"
           ref={register({ required: "Author name required" })}
         />
@@ -33,11 +34,11 @@ const ReviewForm = ({ movie, history }) => {
           type="text"
           className="form-control"
           placeholder="Write your review"
-          defaultValue={movie.review ? movie.review.content : ""}
+          defaultValue={review.content ? review.content : ""}
           name="content"
           ref={register({
             required: "No review text",
-            minLength: { value: 10, message: "Review is too short" }
+            minLength: { value: 20, message: "Review is too short" }
           })}
         />
       </div>

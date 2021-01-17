@@ -17,13 +17,29 @@ router.put('/:movieId/:userName', async (req, res, next) => {
                 upsert: true,
                 runValidators: true
             })
-        res.status(201).json(review);
+        res.status(200).json(review);
     }
     catch (err) {
         next(err)
     }
 });
 
+
+router.delete('/:movieId/:userName', async (req, res, next) => {
+    try {
+        const movieId = req.params.movieId;
+        const userName = req.params.userName;
+        const movie = await movieModel.findByMovieDBId(movieId);
+        await reviewModel.findOneAndDelete({"author": userName, "movie": movie._id})
+        res.status(200).json({
+            code: 200,
+            msg: "Successfully deleted review"
+        })
+    }
+    catch (err) {
+        next(err)
+    }
+});
 router.get('/:movieId/:userName', async (req, res, next) => {
     try {
         const movieId = req.params.movieId;
@@ -34,7 +50,7 @@ router.get('/:movieId/:userName', async (req, res, next) => {
         if (review) {
             // Only send back the db movie id
             const sentReview = { 'author': review.author, 'movie': review.movie.id, 'content': review.content };
-            res.status(201).send(sentReview);
+            res.status(200).send(sentReview);
         }
         else {
             res.status(404).json({
@@ -55,7 +71,7 @@ router.get('/', async (req, res, next) => {
         reviews = reviews.map(review => {
             return { author: review.author, movie: review.movie.id, content: review.content }
         });
-        res.status(201).send(reviews);
+        res.status(200).send(reviews);
     }
     catch(err){
         next(err)
@@ -71,7 +87,7 @@ router.get('/:movieId', async (req, res, next) => {
         reviews = reviews.map(review => {
             return { author: review.author, movie: review.movie.id, content: review.content }
         });
-        res.status(201).send(reviews);
+        res.status(200).send(reviews);
     }
     catch (err) {
         next(err)

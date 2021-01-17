@@ -45,3 +45,23 @@ export const getMovies = () => {
         body: JSON.stringify({ id: id})
     }).then(res => res.json())
 };
+
+// Get reviews for a movie by id
+export const getMovieReviews = (id) => {
+    return fetch(`/api/reviews/${id}`).then(res => res.json());
+}
+
+export const getUserReview = (id, username) => {
+    return fetch(`/api/reviews/${id}/${username}`).then(res => res.json());
+}
+
+export const addUserReview = (id, username, content) => {
+    return fetch(`/api/reviews/${id}/${username}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': window.localStorage.getItem('token')
+        },
+        method: 'post',
+        body: JSON.stringify({ content: content})
+    }).then(res => res.json())
+}

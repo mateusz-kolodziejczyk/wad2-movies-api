@@ -1,6 +1,6 @@
 # Assignment 2 - Web API.
 
-Name: Your Name
+Name: Mateusz Kolodziejczyk
 
 ## Features.
 
@@ -8,8 +8,8 @@ Name: Your Name
  
  + People routes - Allows a user to access information about individual people or all people in a database.
  + User protected routes - Routes related to user favourites are restricted to an authorized user.
- + Feature 3 = ......
- + etc
+ + Custom validation in ReviewModel - Reviews must be at least 20 characters in length to be valid
+ + Integration with my assignment 1 project - Able to access/add user favourites and movies as well as movie reviews posted by other users.
  + etc
 
 ## Installation Requirements
@@ -48,23 +48,18 @@ Give an overview of your web API design, perhaps similar to the following:
 
 |  |  GET | POST | PUT | DELETE
 | -- | -- | -- | -- | -- 
-| movies | -- | -- | -- | -- 
 | /api/movies |Gets a list of movies | N/A | N/A |
 | /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
-| /api/movies/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie | N/A | N/A  
 | -- | -- | -- | -- | -- 
-| users | -- | -- | -- | --
 | /api/users | Get all users | Register or authenticate user | ... | ...
+| /api/users/favourites | Get the user's favourite movies | Add a movie to the user's favourites | ... | ...
 | -- | -- | -- | -- | --
-| reviews | -- | -- | -- | --
 | /api/reviews/ | Get all reviews | N/A | N/A | N/A
 | /api/reviews/{movieid} | Get all reviews for 1 movie | N/A | N/A | N/A
-| /api/reviews/{movieid}/{username} | Get the review from the user | N/A | Insert or Update a review. | N/A
-| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
-| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
-| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
-| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
-If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
+| /api/reviews/{movieid}/{username} | Get the review from the user | N/A | Insert or Update a review. | Delete a review
+| -- | -- | -- | -- | --
+| /api/genres | Get all genres | N/A | N/A | N/A
+| -- | -- | -- | -- | --
 
 
 ## Security and Authentication
@@ -72,11 +67,15 @@ Give details of authentication/ security implemented on the API(e.g. passport/se
 Protected routes:
     /api/movies 
     /api/users/:username/favourites  
-    /api/reviews/ 
+    /api/reviews 
+    /api/genres
+    /api/people
 
 ## Integrating with React App
 
-Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
+I have included the updated react app with required changes to work with my api in this repository.
+
+I integrated a few major aspects into my movie app. One of them is getting the movies using my own api isntead of the tmdb one. Another is adding a favourite to the API which allows multiple users to track their favourites.
 
 ~~~Javascript
 export const addFavourite = (username, id) => {
@@ -90,6 +89,8 @@ export const addFavourite = (username, id) => {
     }).then(res => res.json())
 };
 ~~~
+
+I also integrated the review code from my react app with my review api routes.
 
 A movie id is added to the favourites. The app reflects the change
 

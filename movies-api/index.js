@@ -1,5 +1,5 @@
 import './db';
-import { loadUsers, loadMovies, loadPeople, deleteReviews } from './seedData'
+import { loadUsers, loadMovies, loadPeople, loadGenres, deleteReviews } from './seedData'
 import dotenv, { load } from 'dotenv';
 import express from 'express';
 import moviesRouter from './api/movies';
@@ -25,6 +25,7 @@ if (process.env.SEED_DB) {
     loadUsers();
     loadMovies();
     loadPeople();
+    loadGenres();
     deleteReviews();
 }
 const app = express();
