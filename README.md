@@ -67,12 +67,12 @@ secret=YourJWTSecret
 Uses jwt tokens and passport for authenticating users. No sessions are used.
 
 Protected routes:
-    /api/movies 
-    /api/users/:username/favourites  
-    /api/reviews 
-    /api/genres
-    /api/people
-    /api/cast
++ /api/movies 
++ /api/users/:username/favourites  
++ /api/reviews 
++ /api/genres
++ /api/people
++ /api/cast
 
 ## Integrating with React App
 The amount of documents I have is much smaller than tmdb, so only some data was included just to show that the integration works.
