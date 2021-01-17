@@ -18,26 +18,6 @@ const MovieListPage = (props) => {
   const context = useContext(MoviesContext);
   const movies = context.movies.filter((movies) => !context.favourites.includes(movies._id));
     
-  /*
-  useEffect(() => {
-    if (params.toString() !== "") {
-      context.loadMoviesQueryString(params.toString());
-    }
-    else {
-      context.loadMovies();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
-
-  // Change the state of movies every time its changed
-  useEffect(() => {
-    setMovies(context.movies.filter((m) => {
-      return !context.favorites.find((f) => {
-        return m.id === f.id;
-      })
-    }));
-  }, [context.movies, context.favorites])
-*/
 
   return (
     <>
