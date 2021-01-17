@@ -44,8 +44,6 @@ secret=YourJWTSecret
 
 
 ## API Design
-Give an overview of your web API design, perhaps similar to the following: 
-
 |  |  GET | POST | PUT | DELETE
 | -- | -- | -- | -- | -- 
 | /api/movies |Gets a list of movies | N/A | N/A |
@@ -65,7 +63,8 @@ Give an overview of your web API design, perhaps similar to the following:
 | /api/people | Get all people | N/A | N/A | N/A
 | /api/people/{personid} | Get person details | N/A | N/A | N/A
 ## Security and Authentication
-Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
+Uses jwt tokens and passport for authenticating users. No sessions are used.
+
 Protected routes:
     /api/movies 
     /api/users/:username/favourites  
@@ -75,6 +74,7 @@ Protected routes:
     /api/cast
 
 ## Integrating with React App
+The amount of documents I have is much smaller than tmdb, so only some data was included just to show that the integration works.
 
 I have included the updated react app with required changes to work with my api in this repository.
 
@@ -95,7 +95,7 @@ export const addFavourite = (username, id) => {
 ~~~
 
 I also integrated the review code from my react app with my review api routes.
-
 A movie id is added to the favourites. The app reflects the change.
-
 The app also gets the cast for a movie from my api instead of through tmdb.
+The app gets its genres from my api.
+It also gets any people using my api.
