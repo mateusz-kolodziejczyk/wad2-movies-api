@@ -9,6 +9,7 @@ const AddToFavoriteButton = ({ movie }) => {
   const handleAddToFavorite = e => {
     e.preventDefault();
     context.addToFavourites(authContext.userName, movie.id);
+    context.loadFavourites();
   };
   return (
     <button

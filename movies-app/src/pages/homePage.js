@@ -16,9 +16,6 @@ const MovieListPage = (props) => {
 
   const authContext = useContext(AuthContext);
   const context = useContext(MoviesContext);
-  context.loadFavourites(authContext.userName);
-
-
   const movies = context.movies.filter((movies) => !context.favourites.includes(movies._id));
     
   /*

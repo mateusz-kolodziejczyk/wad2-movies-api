@@ -3,28 +3,28 @@
 Name: Mateusz Kolodziejczyk
 
 ## Features.
-
-...... A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** ......,
  
  + People routes - Allows a user to access information about individual people or all people in a database.
  + User protected routes - Routes related to user favourites are restricted to an authorized user.
  + Custom validation in ReviewModel - Reviews must be at least 20 characters in length to be valid
  + Integration with my assignment 1 project - Able to access/add user favourites and movies as well as movie reviews posted by other users.
- + etc
+ + Review routes - Allows a user to access reviews on a particular movie, as well as add/modify/delete their own review of it.
+ + Cast routes - Allows a user to access the cast list of a specific movie.
+ + Reworked Genres routes - No longer relies on tmdb
 
 ## Installation Requirements
 
-Describe what needs to be on the machine to run the API (Node v?, NPM, MongoDB instance, any other 3rd party software not in the package.json). 
+You need a working mongodb install, as well as npm and node.
 
-Describe getting/installing the software, perhaps:
+To get this repository on your computer you need to clone it as shown below. To do this you will require a working install of git on your machine.
 
 ```bat
 git clone http:\myrepo.git
 ```
 
 Installation
-You need a working mongodb install, as well as npm and node.
-Then run npm install in movies-api and movies-app.
+
+Run npm install to be able to start the app.
 ```bat
 npm install
 ```
@@ -38,7 +38,7 @@ NODE_ENV=development
 PORT=8080
 HOST=
 mongoDB=YourMongoURL
-seedDb=true
+SEED_DB=true
 secret=YourJWTSecret
 ```
 
@@ -60,8 +60,10 @@ Give an overview of your web API design, perhaps similar to the following:
 | -- | -- | -- | -- | --
 | /api/genres | Get all genres | N/A | N/A | N/A
 | -- | -- | -- | -- | --
-
-
+| /api/cast/{movieid} | Get all cast members for a movie | N/A | N/A | N/A
+| -- | -- | -- | -- | --
+| /api/people | Get all people | N/A | N/A | N/A
+| /api/people/{personid} | Get person details | N/A | N/A | N/A
 ## Security and Authentication
 Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
 Protected routes:
@@ -70,6 +72,7 @@ Protected routes:
     /api/reviews 
     /api/genres
     /api/people
+    /api/cast
 
 ## Integrating with React App
 
@@ -77,6 +80,7 @@ I have included the updated react app with required changes to work with my api 
 
 I integrated a few major aspects into my movie app. One of them is getting the movies using my own api isntead of the tmdb one. Another is adding a favourite to the API which allows multiple users to track their favourites.
 
+Below is an example of an api call. All the api calls in my app are included in the movies-app/src/api/movie-api.js file.
 ~~~Javascript
 export const addFavourite = (username, id) => {
     return fetch(`/api/users/${username}/favourites`, {
@@ -92,8 +96,6 @@ export const addFavourite = (username, id) => {
 
 I also integrated the review code from my react app with my review api routes.
 
-A movie id is added to the favourites. The app reflects the change
+A movie id is added to the favourites. The app reflects the change.
 
-## Extra features
-
-. . Briefly explain any non-standard features, functional or non-functional, developed for the app.  
+The app also gets the cast for a movie from my api instead of through tmdb.

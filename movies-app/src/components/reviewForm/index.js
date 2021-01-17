@@ -16,7 +16,9 @@ const ReviewForm = ({ movie, history }) => {
     });
   }, []);
   const onSubmit = data => {
-    addUserReview(movie.id, context.userName , data.content)
+    addUserReview(movie.id, context.userName , data.content);
+    history.push("/movies/favorites");
+
   };
 
   return (

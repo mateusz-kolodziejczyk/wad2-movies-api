@@ -2,11 +2,13 @@ import userModel from '../api/users/userModel';
 import movieModel from '../api/movies/movieModel';
 import personModel from '../api/people/personModel';
 import reviewModel from '../api/reviews/reviewModel';
-import genresModel from '../api/genres/genresModel'
+import genresModel from '../api/genres/genresModel';
+import castModel from '../api/cast/castModel';
 import {movies} from './movies.js';
-import {people} from './people.js';
 
 const genres = require('./genres.json');
+const cast = require('./cast.json');
+const people = require('./people.json');
 const users = [
   {
     'username': 'user1',
@@ -66,6 +68,19 @@ export async function loadMovies() {
       console.error(`failed to Load genre Data: ${err}`);
     }
   }
+  // deletes all cast documents in collection and inserts test data
+  export async function loadCast() {
+    console.log('load seed data');
+    console.log(cast.length);
+    try {
+      await castModel.deleteMany();
+      await castModel.collection.insertMany(cast);
+      console.info(`${cast.length} movie cast lists were successfully stored.`);
+    } catch (err) {
+      console.error(`failed to Load cast Data: ${err}`);
+    }
+  }
+
   export async function deleteReviews(){
     console.log('delete existing reviews');
     try{

@@ -3,26 +3,25 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 
-const CastSchema = new Schema({
-  birthday: { type: String},
-  known_for_department: { type: String },
-  deathday: { type: String },
-  id: { type: Number, required: true, unique: true },
-  name: { type: String },
-  also_known_as: [{ type: String}],
+const CastMemberSchema = new Schema({
+  adult: { type: String},
   gender: { type: Number },
-  biography: { type: String },
+  id: { type: Number, required: true},
+  known_for_department: { type: String },
+  name: { type: String },
+  original_name: { type: String },
   popularity: { type: Number },
-  place_of_bith: { type: String },
-  profile_path: { type: Number },
-  adult: { type: Boolean },
-  imdb_id: { type: String },
-  homepage: { type: String},
+  profile_path: { type: String},
+  cast_id: { type: Number },
+  character: { type: String },
+  credit_id: { type: String },
+  order: { type: Number },
 });
 
-PersonSchema.statics.findByPersonDBId = function (id) {
-  return this.findOne({ id: id });
-};
+const CastSchema = new Schema({
+  id: { type: Number, required: true, unique: true },
+  cast: [CastMemberSchema]
+})
 
 export default mongoose.model('Cast', CastSchema);
 
