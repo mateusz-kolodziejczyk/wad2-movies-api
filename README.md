@@ -49,8 +49,9 @@ secret=YourJWTSecret
 | /api/movies |Gets a list of movies | N/A | N/A |
 | /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
 | -- | -- | -- | -- | -- 
-| /api/users | Get all users | Register or authenticate user | ... | ...
-| /api/users/favourites | Get the user's favourite movies | Add a movie to the user's favourites | ... | ...
+| /api/users | Get all users | Register or authenticate user | N/A | N/A
+| /api/users/{id} | N/A | N/A | Update a user | N/A
+| /api/users/{username}/favourites | Get the user's favourite movies | Add a movie to the user's favourites | N/A | N/A
 | -- | -- | -- | -- | --
 | /api/reviews/ | Get all reviews | N/A | N/A | N/A
 | /api/reviews/{movieid} | Get all reviews for 1 movie | N/A | N/A | N/A
